@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Create-React-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+react 프로젝트를 하기 위해서 다음과 같을 과정이 필요함.
 
-## Available Scripts
+1.  Node.js 설치 (LTS버전을 설치하도록 하자.)
+    -   https://nodejs.org
+    -   버전 확인 : node -v
+        <br><br>
+2.  npm 설치
+    -   npm은 Node Packaged Manager의 약자로, Node로 만들어진 package를 관리하기 위한 툴임
+    -   Node.js를 설치할때 자동으로 설치되므로 별도로 설치할 필요가 없음.
+    -   다만 npm은 npx, yarn으로도 대체가 가능함.
+    -   Python의 pip와 유사함.
+    -   버전 확인 : npm -v
+        <br><br>
+3.  create-react-app 설치
 
-In the project directory, you can run:
+    -   npm 으로 설치할 경우 전역(Global)에 install해야함
+    -   컴퓨터 어디서든 Create React App을 실행할 수 있도록 설치하는 옵션임.
+    -   npm install -g create-react-app
 
-### `npm start`
+    <br><br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+4.  Create React App 프로젝트 생성
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    -   npm이 아닌 npx으로 생성
+    -   npx는 임시로 프로그램을 설치하고 한번만 실행후 지운다는 의미를 가짐
+    -   npx create-react-app 프로젝트명
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5.  React App 배포(deploy)
+    -   create-react-app의 용량은 상당히 무거운 편.
+    -   브라우저는 한번 리소스를 내려받아 캐시에 저장하여, 다시 리소스를 내려받을때 캐시에 저장된 리소스를 사용함.
+    -   근데, 캐시를 비울경우, 캐시에 저장된 리소스는 다 사라지게 되며, 정확한 리소스의 용량을 체크함.
+    -   배포 : npm run build
+    -   build폴더가 생성되면서 index.html파일을 열어서 확인해보자.
