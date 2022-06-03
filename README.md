@@ -166,3 +166,27 @@ render() {
     );
 }
 </pre>
+
+## 10. shouldComponentUpdate
+
+리엑트는 state가 변경될 경우 render함수를 호출하여 컴포넌트를 렌더링을 함.<br>
+무차별적으로 렌더링이 발생할 경우, 현재처럼 소규모 프로젝트는 괜찮으나, 대규모 프로젝트시 문제가 발생할 가능성이 큼<br>
+따라서 리엑트에서 제공하는 shouldComponentUpdate메서드를 이용하여 무분별한 렌더링을 제어해야함.<br>
+
+shouldComponentUpdate의 경우 ES6메서드 방식으로 작성되며, 반환값은 boolean타입<br>
+만약 false를 반환할 경우 render함수를 호출하지 않으며, true시 render함수를 동작시킴.<br>
+메서드의 매개변수로 newProps, newState값을 전달받음<br>
+
+newProps는 변경된 props를 의미하고, newState는 변경된 state값을 의미하는데,<br>
+해당 값들을 this.props 또는 this.state으로 비교하여 boolean타입으로 반환한다.
+
+<pre>
+shouldComponentUpdate(newProps, newState) {
+    // CRUD의 Create시 추가된 항목이 없을 경우 false를 반환하여 무분별한 렌더링을 막는다.
+    if (newProps.data.length === this.props.data.length) {
+        return false;
+    }
+
+    return true;
+}
+</pre>
