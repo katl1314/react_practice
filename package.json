@@ -14,7 +14,8 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build"
+        "build": "react-scripts build",
+        "serve": "npx serve -s build -l 8080"
     },
     "eslintConfig": {
         "extends": [

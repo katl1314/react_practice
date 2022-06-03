@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-class Article extends Component {
+class ReadContent extends Component {
     render() {
         const { title, desc } = this.props;
         return (
@@ -12,4 +12,4 @@ class Article extends Component {
     }
 }
 
-export default Article;
+export default ReadContent;
