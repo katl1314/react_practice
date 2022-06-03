@@ -57,8 +57,11 @@ class MyReactApp extends Component {
             _article = (
                 <CreateContent
                     onSubmit={({ title, desc }) => {
+                        // Spread문법 또는 Array.from을 통해 배열 복사본 생성 가능
+                        // 배열 복사본을 만드는 이유 -> 원본 배열이 훼손되지 않게끔 하기 위해서
                         const datas = [...this.state.content];
                         const maxIndex = this.max_content_index + 1;
+                        // Array.prototype.push(...datas): number(array length)
                         datas.push({
                             id: maxIndex,
                             title,
