@@ -11,6 +11,9 @@ class UpdateContent extends Component {
             title: this.props.data.title,
             desc: this.props.data.desc,
         };
+
+        // inputFormSubmit메서드내 this UpdateContext 인스턴스으로 변경
+        this.inputFormSubmit = this.inputFormSubmit.bind(this);
     }
 
     inputFormSubmit(e) {
@@ -41,7 +44,7 @@ class UpdateContent extends Component {
                         name="title"
                         id="title"
                         value={this.state.title}
-                        onChange={this.inputFormSubmit.bind(this)}
+                        onChange={this.inputFormSubmit}
                     ></input>
                 </p>
                 <p>
@@ -52,7 +55,7 @@ class UpdateContent extends Component {
                         name="desc"
                         id="desc"
                         value={this.state.desc}
-                        onChange={this.inputFormSubmit.bind(this)}
+                        onChange={this.inputFormSubmit}
                     ></textarea>
                 </p>
                 <p>
