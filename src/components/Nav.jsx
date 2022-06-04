@@ -9,7 +9,7 @@ class Nav extends Component {
      */
     shouldComponentUpdate(newProps, newState) {
         /**
-         * 리엑트는 기본적으로 state가 변경되면 렌더링이 발생함.
+         * 리엑트는 기본적으로 props 또는 state가 변경되면 렌더링이 발생함.
          * 아무 관계 없는 컴포넌트도 렌더링이 발생하기 때문에
          * 페이스북에서는 shouldComponentUpdate메서드를 지원하며
          * false를 반환함으로써 무의미한 렌더링을 제어한다.(성능 개선)

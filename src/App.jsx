@@ -6,6 +6,7 @@ import {
     Control,
     ReadContent,
     CreateContent,
+    UpdateContent,
 } from "./components/index.js";
 
 import React, { Component } from "react";
@@ -18,9 +19,9 @@ class MyReactApp extends Component {
                 title: "WEB",
                 sub: "world wide web!",
             },
-            mode: "read",
+            mode: "welcome",
             welcome: { title: "Welcome", desc: "Hello, React" },
-            select_index: 2,
+            select_index: 0,
             content: [
                 { id: 1, title: "HTML", desc: "HTML is for infomation" },
                 { id: 2, title: "CSS", desc: "CSS is for design" },
@@ -35,24 +36,29 @@ class MyReactApp extends Component {
         console.log("MyReactApp constructor");
     }
 
-    render() {
-        let _title, _desc, _article;
-
-        if (this.state.mode === "welcome") {
-            _title = this.state.welcome.title;
-            _desc = this.state.welcome.desc;
-            _article = <ReadContent title={_title} desc={_desc} />;
-        } else if (this.state.mode === "read") {
-            let index = 0;
-            while (index < this.state.content.length) {
-                if (index === this.state.select_index) {
-                    _title = this.state.content[index].title;
-                    _desc = this.state.content[index].desc;
-                    _article = <ReadContent title={_title} desc={_desc} />;
-                    break;
-                }
-                index++;
+    getReadContent() {
+        let i = 0;
+        while (i < this.state.content.length) {
+            var data = this.state.content[i];
+            if (data.id === this.state.select_index) {
+                return data;
             }
+            i++;
+        }
+    }
+
+    getContent() {
+        let _article;
+        if (this.state.mode === "welcome") {
+            _article = (
+                <ReadContent
+                    title={this.state.welcome.title}
+                    desc={this.state.welcome.desc}
+                />
+            );
+        } else if (this.state.mode === "read") {
+            const data = this.getReadContent();
+            _article = <ReadContent title={data.title} desc={data.desc} />;
         } else if (this.state.mode === "create") {
             _article = (
                 <CreateContent
@@ -61,7 +67,6 @@ class MyReactApp extends Component {
                         // 배열 복사본을 만드는 이유 -> 원본 배열이 훼손되지 않게끔 하기 위해서
                         const datas = [...this.state.content];
                         const maxIndex = this.max_content_index + 1;
-                        // Array.prototype.push(...datas): number(array length)
                         datas.push({
                             id: maxIndex,
                             title,
@@ -70,13 +75,37 @@ class MyReactApp extends Component {
                         this.setState({
                             content: datas,
                             mode: "read",
-                            select_index: maxIndex - 1,
+                            select_index: maxIndex,
                         });
                     }}
                 />
             );
+        } else if (this.state.mode === "update") {
+            const data = this.getReadContent();
+            if (data) {
+                _article = (
+                    <UpdateContent
+                        data={data}
+                        onSubmit={({ title, desc }) => {
+                            const _content = this.state.content.map((d) => {
+                                if (d.id === this.state.select_index) {
+                                    return { id: d.id, title, desc };
+                                }
+                                return {
+                                    id: d.id,
+                                    title: d.title,
+                                    desc: d.desc,
+                                };
+                            });
+                            this.setState({ content: _content });
+                        }}
+                    />
+                );
+            }
         }
-
+        return _article;
+    }
+    render() {
         return (
             <div className="wrap">
                 {
@@ -95,7 +124,7 @@ class MyReactApp extends Component {
                     onChangeNav={(id) => {
                         this.setState({
                             mode: "read",
-                            select_index: id - 1,
+                            select_index: id,
                         });
                     }}
                 />
@@ -107,7 +136,7 @@ class MyReactApp extends Component {
                     }}
                 />
 
-                {_article}
+                {this.getContent()}
             </div>
         );
     }

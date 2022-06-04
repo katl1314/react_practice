@@ -190,3 +190,7 @@ shouldComponentUpdate(newProps, newState) {
     return true;
 }
 </pre>
+
+## 11. 리엑트 렌더링
+
+리엑트는 기본적으로 state, props, 부모 컴포넌트가 렌더링되었을때 렌더링이 발생함.
