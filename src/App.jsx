@@ -1,13 +1,11 @@
 import "./App.css";
 
-import {
-    SubJect,
-    Nav,
-    Control,
-    ReadContent,
-    CreateContent,
-    UpdateContent,
-} from "./components/index.js";
+import SubJect from "./components/Subject";
+import Nav from "./components/Nav";
+import Control from "./components/Control";
+import ReadContent from "./components/ReadContent";
+import CreateContent from "./components/CreateContent";
+import UpdateContent from "./components/UpdateContent";
 
 import React, { Component } from "react";
 
