@@ -7,7 +7,7 @@ class Nav extends Component {
      * @param {any} newState  - 변경된 state
      * @returns {boolean} true : 렌더링 O, false : 렌더링 X
      */
-    shouldComponentUpdate(newProps, newState) {
+    shouldComponentUpdate(newProps) {
         /**
          * 리엑트는 기본적으로 props 또는 state가 변경되면 렌더링이 발생함.
          * 아무 관계 없는 컴포넌트도 렌더링이 발생하기 때문에
@@ -18,10 +18,26 @@ class Nav extends Component {
         if (newProps.data.length > this.props.data.length) {
             return true;
         }
-        return false; // 항목이 추가되지 않으면 render메서드를 호출하지 않는다.
+
+        return this.getChangedData(newProps); // 항목이 추가되지 않으면 render메서드를 호출하지 않는다.
     }
+
+    getChangedData(newProps) {
+        const selectIndex = this.props.index;
+        const _content = this.props.data;
+        return newProps.data.some(({ id, title, desc }, index) => {
+            if (id === selectIndex) {
+                return (
+                    _content[index].title !== title ||
+                    _content[index].desc !== desc
+                );
+            }
+            return false;
+        });
+        // 항목이 업데이트 되었을 경우
+    }
+
     render() {
-        console.log("Nav render");
         let list = [];
         let data = this.props.data;
         // this.props.data의 id, title을 이용하여 생성한 태그를 포함한 배열을 생성.

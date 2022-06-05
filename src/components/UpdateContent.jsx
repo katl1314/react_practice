@@ -8,6 +8,7 @@ class UpdateContent extends Component {
          * constructor에서 this.state에 props값을 할당함.
          */
         this.state = {
+            id: this.props.data.id,
             title: this.props.data.title,
             desc: this.props.data.desc,
         };
@@ -30,12 +31,13 @@ class UpdateContent extends Component {
                 method="post"
                 onSubmit={(e) => {
                     e.preventDefault();
-                    const id = this.props.data.id;
+                    const id = Number(e.target.id.value);
                     const title = e.target.title.value;
                     const desc = e.target.desc.value;
                     this.props.onSubmit({ id, title, desc });
                 }}
             >
+                <input type="hidden" name="id" value={this.state.id} />
                 <p>
                     <label htmlFor="title">TITLE</label>
                     <br></br>

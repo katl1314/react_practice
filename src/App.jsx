@@ -33,7 +33,6 @@ class MyReactApp extends Component {
             ],
         };
         this.max_content_index = 3;
-        console.log("MyReactApp constructor");
     }
 
     getReadContent() {
@@ -86,10 +85,10 @@ class MyReactApp extends Component {
                 _article = (
                     <UpdateContent
                         data={data}
-                        onSubmit={({ title, desc }) => {
+                        onSubmit={({ id, title, desc }) => {
                             const _content = this.state.content.map((d) => {
-                                if (d.id === this.state.select_index) {
-                                    return { id: d.id, title, desc };
+                                if (d.id === id) {
+                                    return { id, title, desc };
                                 }
                                 return {
                                     id: d.id,
@@ -97,7 +96,7 @@ class MyReactApp extends Component {
                                     desc: d.desc,
                                 };
                             });
-                            this.setState({ content: _content });
+                            this.setState({ content: _content, mode: "read" });
                         }}
                     />
                 );
@@ -105,6 +104,7 @@ class MyReactApp extends Component {
         }
         return _article;
     }
+
     render() {
         return (
             <div className="wrap">
@@ -121,6 +121,7 @@ class MyReactApp extends Component {
 
                 <Nav
                     data={this.state.content}
+                    index={this.state.select_index}
                     onChangeNav={(id) => {
                         this.setState({
                             mode: "read",
