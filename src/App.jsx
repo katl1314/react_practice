@@ -19,18 +19,18 @@ class MyReactApp extends Component {
             },
             mode: "welcome",
             welcome: { title: "Welcome", desc: "Hello, React" },
-            select_index: 0,
+            select_index: -1,
             content: [
-                { id: 1, title: "HTML", desc: "HTML is for infomation" },
-                { id: 2, title: "CSS", desc: "CSS is for design" },
+                { id: 0, title: "HTML", desc: "HTML is for infomation" },
+                { id: 1, title: "CSS", desc: "CSS is for design" },
                 {
-                    id: 3,
+                    id: 2,
                     title: "JavaScript",
                     desc: "JavaScript is for interactive",
                 },
             ],
         };
-        this.max_content_index = 3;
+        this.max_content_index = this.state.content.length;
     }
 
     getReadContent() {
@@ -63,7 +63,7 @@ class MyReactApp extends Component {
                         // Spread문법 또는 Array.from을 통해 배열 복사본 생성 가능
                         // 배열 복사본을 만드는 이유 -> 원본 배열이 훼손되지 않게끔 하기 위해서
                         const datas = [...this.state.content];
-                        const maxIndex = this.max_content_index + 1;
+                        const maxIndex = this.max_content_index;
                         datas.push({
                             id: maxIndex,
                             title,
@@ -129,12 +129,33 @@ class MyReactApp extends Component {
                 />
                 <Control
                     onChangeControl={(mode) => {
-                        this.setState({
-                            mode,
-                        });
+                        if (mode === "delete") {
+                            // 선택한 항목이 없으면?
+                            if (this.state.select_index < 0) {
+                                return false;
+                            }
+
+                            // 아니오 클릭 시
+                            if (!window.confirm("정말 삭제 하시겠습니까?")) {
+                                return false;
+                            }
+
+                            const _content = this.state.content.filter((d) => {
+                                return d.id !== this.state.select_index;
+                            });
+
+                            this.setState({
+                                select_index: -1,
+                                content: _content,
+                                mode: "welcome",
+                            });
+                        } else {
+                            this.setState({
+                                mode,
+                            });
+                        }
                     }}
                 />
-
                 {this.getContent()}
             </div>
         );

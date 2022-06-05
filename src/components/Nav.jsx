@@ -15,7 +15,7 @@ class Nav extends Component {
          * false를 반환함으로써 무의미한 렌더링을 제어한다.(성능 개선)
          */
         // 새로운 항목이 추가되면 render메서드를 호출한다.
-        if (newProps.data.length > this.props.data.length) {
+        if (newProps.data.length !== this.props.data.length) {
             return true;
         }
 
@@ -34,7 +34,6 @@ class Nav extends Component {
             }
             return false;
         });
-        // 항목이 업데이트 되었을 경우
     }
 
     render() {
